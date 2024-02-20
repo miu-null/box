@@ -3,8 +3,9 @@ import "./App.css";
 import {ethers} from "ethers";
 import write from "./utils/write.json";
 
-// 1. need to authorize admin address and give an access to admin page
-// 2. need to seperate components (nav-bar or etc...)
+// 1. authorize admin address and give an access to admin page
+// 2. seperate components (nav-bar or etc...)
+// 3. add event code
 
 // adding the contract address for writing
 const writeYourComment = "";
