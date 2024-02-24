@@ -9,15 +9,16 @@ import write from "./utils/write.json";
 // 4. if the event succecfully ended, then BE will working
 // 5. ?
 
-// adding the contract address for writing
+// add the contract address for writing
 const writeYourComment = "";
+
+// add the account address for admin
+const adminAccount = "";
 
 const App = () => {
     const [currentAccount, setCurrentAccount] = useState("");
     // useEffect(() => {
-    //     fetch("/api")
-    //         .then((res) => res.text())
-    //         .then(setGreeting);
+    //     // .then(setGreeting);
     // }, []);
 
     //confirm the wallet connected
@@ -73,8 +74,10 @@ const App = () => {
 
     //
 
+    //will be changed after
     useEffect(() => {
         ifWalletIsConnected();
+        fetch("/api").then((res) => res.text());
     }, []);
 
     return <div className="App">//need to make</div>;
