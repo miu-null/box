@@ -16,7 +16,7 @@ const writeYourComment = "";
 const adminAccount = "";
 
 const App = () => {
-    const [currentAccount, setCurrentAccount] = useState("");
+    const [currentAccount, setCurrentAccount, gasPrice, setGasPrice, estimateGas] = useState("");
     // useEffect(() => {
     //     // .then(setGreeting);
     // }, []);
@@ -59,20 +59,44 @@ const App = () => {
         }
     };
 
-    //write and then transaction working for first smart contract...
+    //write and then transaction working for first(write)smart contract...
     //it must be edited
     const setupEventListener = async () => {
         try {
             const {ethereum} = window;
             if (ethereum) {
                 const provider = new ethers.BrowserProvider(window.ethereum);
+                const signer = await provider.getSigner();
+                const connectedContract = new ethers.Contract(writeYourComment, write.abi, signer);
+
+                connectedContract.on("newComment", (from, tokenId) => {
+                    console.log(from, tokenId.toNumber());
+                    alert(`Thank you for comment`);
+                });
+
+                console.log("Setup Event Listener");
+            } else {
+                console.log("No Ethereum object");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const writeYourComment = async () => {
+        try {
+            const {ethereum} = window;
+            if (ethereum) {
+                const provider = new ethers.BrowserProvider(window.ethereum);
+                const gasPrice = await provider.getGasPrice();
+                const gasPriceInGwei = ethers.utils.formatUnits(gasPrice, "gwei");
+                console.log(gasPriceInGwei);
                 const signer = provider.getSigner();
                 const connectedContract = new ethers.Contract(writeYourComment, write.abi, signer);
+                console.log("gonna pop wallet now to pay gas ..");
             }
         } catch (error) {}
     };
-
-    //
 
     //will be changed after
     useEffect(() => {
@@ -80,7 +104,25 @@ const App = () => {
         fetch("/api").then((res) => res.text());
     }, []);
 
-    return <div className="App">//need to make</div>;
+    const renderNotConnectedContainer = () => (
+        <button onClick={connectWallet} className="connect-wallet-button">
+            Connect Wallet
+        </button>
+    );
+
+    const renderWriteYourComment = () => {
+        <button onClick={} className="write-comment-button">
+            Write your Comment
+        </button>;
+    };
+
+    return (
+        <div className="App">
+            //need to make
+            <p></p>
+            {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
+        </div>
+    );
 };
 
 export default App;
