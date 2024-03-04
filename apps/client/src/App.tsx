@@ -121,7 +121,7 @@ const App = () => {
     );
 
     const renderWriteYourComment = () => {
-        <button onClick={} className="write-comment-button">
+        <button onClick={writeComment} className="write-comment-button">
             Write your Comment
         </button>;
     };
@@ -130,7 +130,7 @@ const App = () => {
         <div className="App">
             //need to make
             <p></p>
-            {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
+            {currentAccount === "" ? renderNotConnectedContainer() : renderWriteYourComment()}
         </div>
     );
 };
