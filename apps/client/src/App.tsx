@@ -110,9 +110,19 @@ const App = () => {
 
     //will be changed after
     useEffect(() => {
-        ifWalletIsConnected();
-        fetch("/api").then((res) => res.text());
-    }, []);
+        fetch("/api")
+            .then((res) => res.text())
+            .then(ifWalletIsConnected);
+
+        // const fetchData = async () => {
+        //     await ifWalletIsConnected();
+        //     const response = await fetch("/api");
+        //     const data = await response.text();
+        //     console.log(data);
+        // };
+
+        // fetchData();
+    }, [ifWalletIsConnected]);
 
     const renderNotConnectedContainer = () => (
         <button onClick={connectWallet} className="connect-wallet-button">
