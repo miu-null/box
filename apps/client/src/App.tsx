@@ -83,19 +83,29 @@ const App = () => {
         }
     };
 
-    const writeYourComment = async () => {
+    const writeComment = async () => {
         try {
             const {ethereum} = window;
             if (ethereum) {
                 const provider = new ethers.BrowserProvider(window.ethereum);
-                const gasPrice = await provider.getGasPrice();
-                const gasPriceInGwei = ethers.utils.formatUnits(gasPrice, "gwei");
-                console.log(gasPriceInGwei);
-                const signer = provider.getSigner();
-                const connectedContract = new ethers.Contract(writeYourComment, write.abi, signer);
-                console.log("gonna pop wallet now to pay gas ..");
+                const gasPrice = (await provider.getFeeData()).gasPrice;
+                if (gasPrice) {
+                    const gasPriceInGwei = ethers.formatUnits(gasPrice, "gwei");
+                    console.log(gasPriceInGwei);
+                    const signer = await provider.getSigner();
+                    const connectedContract = new ethers.Contract(
+                        writeYourComment,
+                        write.abi,
+                        signer
+                    );
+                    console.log("gonna pop wallet now to pay gas ..");
+                } else {
+                    console.log("Failed to estimate gas...");
+                }
             }
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     //will be changed after
