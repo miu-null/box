@@ -130,11 +130,11 @@ const App = () => {
         </button>
     );
 
-    const renderWriteYourComment = () => {
+    const renderWriteYourComment = () => (
         <button onClick={writeComment} className="write-comment-button">
             Write your Comment
-        </button>;
-    };
+        </button>
+    );
 
     return (
         <div className="App">
