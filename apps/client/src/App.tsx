@@ -9,19 +9,21 @@ import write from "./utils/write.json";
 // 4. if the event succecfully ended, then BE will working
 // 5. ?
 
-// add the contract address for writing
-const writeYourComment = "";
+// // add the contract address for writing
+// const writeYourComment = "";
 
-// add the account address for admin
-const adminAccount = "";
+// // add the account address for admin
+// const adminAccount = "";
 
 const App = () => {
-    const [currentAccount, setCurrentAccount, gasPrice, setGasPrice, estimateGas] = useState("");
-    // useEffect(() => {
-    //     // .then(setGreeting);
-    // }, []);
+    // const [greeting, setGreeting] = useState("");
 
-    //confirm the wallet connected
+    const [currentAccount, setCurrentAccount, gasPrice, setGasPrice, estimateGas] = useState("");
+    //     // useEffect(() => {
+    //     //     // .then(setGreeting);
+    //     // }, []);
+
+    //     //confirm the wallet connected
     const ifWalletIsConnected = async () => {
         const {ethereum} = window;
         if (!ethereum) {
@@ -42,7 +44,7 @@ const App = () => {
         }
     };
 
-    //make connection
+    //     //make connection
     const connectWallet = async () => {
         try {
             const {ethereum} = window;
@@ -59,8 +61,8 @@ const App = () => {
         }
     };
 
-    //write and then transaction working for first(write)smart contract...
-    //it must be edited
+    //     //write and then transaction working for first(write)smart contract...
+    //     //it must be edited
     const setupEventListener = async () => {
         try {
             const {ethereum} = window;
@@ -108,20 +110,46 @@ const App = () => {
         }
     };
 
-    //will be changed after
+    //     //will be changed after
+    //     useEffect(() => {
+    //         //     fetch("/api")
+    //         //         .then((res) => res.text())
+    //         //         .then(ifWalletIsConnected);
+
+    //         const fetchData = async () => {
+    //             await ifWalletIsConnected();
+    //             const response = await fetch("/api");
+    //             const data = await response.text();
+    //             console.log(data);
+    //         };
+
+    //         fetchData();
+    //     }, [ifWalletIsConnected]);
+
+    //     const renderNotConnectedContainer = () => (
+    //         <button onClick={connectWallet} className="connect-wallet-button">
+    //             Connect Wallet
+    //         </button>
+    //     );
+
+    //     const renderWriteYourComment = () => (
+    //         <button onClick={writeComment} className="write-comment-button">
+    //             Write your Comment
+    //         </button>
+    //     );
+
+    //     return (
+    //         <div className="App">
+    //             //need to make
+    //             <p></p>
+    //             {currentAccount === "" ? renderNotConnectedContainer() : renderWriteYourComment()}
+    //         </div>
+    //     );
+
     useEffect(() => {
         fetch("/api")
             .then((res) => res.text())
             .then(ifWalletIsConnected);
-
-        // const fetchData = async () => {
-        //     await ifWalletIsConnected();
-        //     const response = await fetch("/api");
-        //     const data = await response.text();
-        //     console.log(data);
-        // };
-
-        // fetchData();
     }, [ifWalletIsConnected]);
 
     const renderNotConnectedContainer = () => (
@@ -138,9 +166,17 @@ const App = () => {
 
     return (
         <div className="App">
-            //need to make
-            <p></p>
-            {currentAccount === "" ? renderNotConnectedContainer() : renderWriteYourComment()}
+            <div className="container">
+                <div className="header-container">
+                    <p className="header gradient-text">My NFT Collection</p>
+                    <p className="sub-text">
+                        Each unique. Each beautiful. Discover your NFT today.
+                    </p>
+                    {currentAccount === ""
+                        ? renderNotConnectedContainer()
+                        : renderWriteYourComment()}
+                </div>
+            </div>
         </div>
     );
 };

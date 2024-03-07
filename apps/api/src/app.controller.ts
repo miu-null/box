@@ -14,10 +14,10 @@ import { CreateCommentDto } from './dto/comments.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  // @Get()
-  // getHello(): string {
-  //   return this.appService.getHello();
-  // }
+  @Get()
+  getHello(): string {
+    return this.appService.getHello();
+  }
 
   @Post()
   async writeComment(@Body() data: CreateCommentDto) {
