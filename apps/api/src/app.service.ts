@@ -4,12 +4,13 @@ import { Injectable } from '@nestjs/common';
 export class AppService {
   private comments = [];
   getHello(): string {
-    return 'Hello World!';
+    console.log('imhere');
+    return 'Write your comment!';
   }
 
   async writeComment(Account: string, Comment: string, Date: string) {
     const commentId = this.comments.length + 1;
-    //const writeComment = await
+    // const writeComment = await
     this.comments.push({ id: commentId, Account, Comment, Date });
     return Comment;
   }
